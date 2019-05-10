@@ -1,17 +1,16 @@
-Scranner - Backend 
+inenco - Backend 
 
-A backend API that allows users to post recipes, and store ingredients in a shopping list.
+A backend API that allows owners to manage site information.
 
-A live version can be viewed at: https://scranner123.herokuapp.com/
+A live version can be viewed at: https://inenco.herokuapp.com/
 
 Getting Started
-These instructions will get you a copy of the project up and running on your local machine for development and testing purpo
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes
 
 Prerequisites
 Before starting, you should ensure the following are installed:
 
 Node v8.12
-
 MongoDB v4.0
 
 For this project, you will also require the following dependencies:
@@ -65,16 +64,9 @@ Api endpoints
 
 The following endpoints are available to users.
 
-GET /api -- returns the home page.
-
-GET /api/users/:username -- returns a specific user.
-POST /api/users/:username -- adds a new user, requires a JSON object containing a username, firstName, lastName, and email.
-PATCH /api/users/:username -- updates an existing users details.
-
-GET /api/recipes/:user_id -- returns a specific user's id.
-POST /api/recipes/:user_id -- adds a recipe for a user, requires a name, user, servings and ingredients.
-DELETE /api/recipes//:recipe_id -- deletes a specific recipe.
-
-GET /api/shopping-lists/:user_id -- returns a specific user's shopping list
-DELETE /api/shopping-lists/:user_id -- empties a given user's shopping list.
-PATCH /api/shopping-lists/:user_id/:recipe_id -- adds or removed a given recipe from the shopping list. Requires an update query or either 'add' or 'remove'
+GET / -- returns the home page.
+GET /api/owners/:username -- returns a specific owner
+POST /api/owners/ -- adds a new owner, requires a JSON object containing a username, first name, last name, and email
+GET /api//sites/:owner_id -- returns a specific owners site
+POST /api/sites/:owner_id -- adds a site for an owner
+DELETE /api/sites/:site_id -- deletes a specific site
