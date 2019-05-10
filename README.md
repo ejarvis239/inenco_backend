@@ -65,8 +65,13 @@ Api endpoints
 The following endpoints are available to users.
 
 GET / -- returns the home page.
+
 GET /api/owners/:username -- returns a specific owner
+
 POST /api/owners/ -- adds a new owner, requires a JSON object containing a username, first name, last name, and email
+
 GET /api//sites/:owner_id -- returns a specific owners site
+
 POST /api/sites/:owner_id -- adds a site for an owner
+
 DELETE /api/sites/:site_id -- deletes a specific site
