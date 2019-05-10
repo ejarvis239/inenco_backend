@@ -1,0 +1,41 @@
+{
+  "name": "inenco",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha spec",
+    "dev": "nodemon listen.js",
+    "start": "node listen.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ejarvis239/in"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ejarvis239/in/issues"
+  },
+  "homepage": "https://github.com/ejarvis239/in#readme",
+  "dependencies": {
+    "body": "^5.1.0",
+    "body-parser": "^1.19.0",
+    "chai": "^4.2.0",
+    "cors": "^2.8.5",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "mongoose": "^5.5.7",
+    "parser": "^0.1.4",
+    "supertest": "^4.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^5.8.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "^7.11.1",
+    "nodemon": "^1.19.0"
+  }
+}

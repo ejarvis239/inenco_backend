@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home Page</title>
+</head>
+
+<body>
+    <h3>Api endpoints</h3>
+
+    <ul>
+        <li>GET /api -- returns this home page.
+        </li>
+        <br>
+        <li> GET /api/owners/:username -- returns a specific owner. </li>
+        <li> POST /api/owners/ -- adds a new owner, requires a JSON object containing a username, firstName, lastName, and email.</li>
+        <br>
+        <li> GET /api//sites/:owner_id -- returns a specific owners site.</li>
+        <li> POST /api/sites/:owner_id -- adds a site for an owner.</li>
+        <li> DELETE /api/sites/:site_id -- deletes a specific site.</li>
+    </ul>
+</body>
+
+</html>

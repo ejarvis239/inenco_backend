@@ -1,0 +1,82 @@
+[
+    {
+        "address": {
+            "houseNumber": "1",
+            "street": "something street",
+            "city": "liverpool",
+            "postcode": "L1 1AB",
+            "telephone": "07733781805"
+          },        
+        "manager": "somebody",
+        "gasMeters": 
+        [
+            {
+                "accountNumber": "123",
+                "ID": "3"
+            }, 
+            {                
+                "accountNumber": "456",
+                "ID": "4"
+            }
+        ],
+        "electricityMeters": 
+        [
+            {
+                "accountNumber": "123",
+                "ID": "3"
+            }, 
+            {                
+                "accountNumber": "456",
+                "ID": "4"
+            }
+        ],
+        "AMRenabled": "yes",
+        "floorspace": 
+            {
+                "floorspace": "213",
+                "units": "square meters"
+            },
+        "owner": "emmajarvis"
+    },
+
+    {
+        "address": {
+            "houseNumber": "2",
+            "street": "something street",
+            "city": "liverpool",
+            "postcode": "L1 1AB",
+            "telephone": "07733781805"
+          },        
+        "manager": "somebody",
+        "gasMeters": 
+        [
+            {
+                "accountNumber": "123",
+                "ID": "3"
+            }, 
+            {                
+                "accountNumber": "456",
+                "ID": "4"
+            }
+        ],
+        "electricityMeters": 
+        [
+            {
+                "accountNumber": "123",
+                "ID": "3"
+            }, 
+            {                
+                "accountNumber": "456",
+                "ID": "4"
+            }
+        ],
+  
+        "AMR enabled": "yes",
+        "floorspace": {
+            "floorspace": "213",
+            "units": "square meters"
+        },
+        "owner": "adamjarvis"
+    }
+
+]
