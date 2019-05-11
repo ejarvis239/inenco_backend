@@ -1,15 +1,16 @@
 const siteRouter = require('express').Router();
-const {getSites, getSite, addSite, addSiteToOwner, deleteSite} = require('../controllers/sites')
+const {getSites, getSiteByOwner, getSiteByID, addSite, addSiteToOwner, deleteSite} = require('../controllers/sites')
 
 siteRouter.route('/')
     .get(getSites)
     .post(addSite)
 
 siteRouter.route('/:owner_id')
-    .get(getSite)
+    .get(getSiteByOwner)
     .post(addSiteToOwner)
 
 siteRouter.route('/:site_id')
-    .delete(deleteSite);
+    .delete(deleteSite)
+    .get(getSiteByID)
   
 module.exports = siteRouter;

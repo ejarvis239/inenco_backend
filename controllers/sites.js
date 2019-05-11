@@ -10,7 +10,7 @@ const getSites = (req, res, next) => {
     .catch(next)
 };
 
-const getSite = (req, res, next) => {
+const getSiteByOwner = (req, res, next) => {
   Site.find({ owner: req.params.owner_id })
       .populate('owner')
       .then((site) => {
@@ -18,6 +18,15 @@ const getSite = (req, res, next) => {
       })
       .catch(next);
 };
+
+const getSiteByID = (req, res, next) => {
+  Site.find({ _id: req.params.site_id})
+  .populate('owner')
+    .then(site => {
+      res.status(200).send({ site })
+    })
+    .catch(next)
+}
 
 const addSite = (req, res, next) => {
   const newSite = Site({
@@ -89,4 +98,4 @@ const addSiteToOwner = (req, res, next) => {
 
 }
 
-module.exports = { getSites, getSite, addSite, addSiteToOwner, deleteSite };
+module.exports = { getSites, getSiteByOwner, getSiteByID, addSite, addSiteToOwner, deleteSite };

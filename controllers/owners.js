@@ -32,4 +32,4 @@ const addOwner = (req, res, next) => {
         .catch(next);
     };
 
-module.exports = { getOwner, addOwner };
+module.exports = { getOwner, addOwner, getOwners };
