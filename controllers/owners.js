@@ -9,6 +9,14 @@ const getOwner = (req, res, next) => {
     .catch(next);
 };
 
+const getOwners = (req, res, next) => {
+  Owner.find()
+  .then(owners => {
+    res.status(200).send({ owners })
+  })
+  .catch(next)
+};
+
 const addOwner = (req, res, next) => {
   const newOwner = Owner({
         ...req.body,
