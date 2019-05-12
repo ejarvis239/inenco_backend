@@ -46,6 +46,93 @@ describe('/api', () => {
           });
       });
     });
+    it('POST site returns status 201 and a new site', () => {
+    return request
+      .post('/api/sites')
+      .send( {
+        "address": {
+          "houseNumber": "1",
+          "street": "something street",
+          "city": "liverpool",
+          "postcode": "L1 1AB",
+          "telephone": "07733781805"
+        },
+        "manager": "somebody",
+        "gasMeters": [
+          {
+            "accountNumber": "123",
+            "ID": "3"
+          },
+          {
+            "accountNumber": "456",
+            "ID": "4"
+          }
+        ],
+        "electricityMeters": [
+          {
+            "accountNumber": "123",
+            "ID": "3"
+          },
+          {
+            "accountNumber": "456",
+            "ID": "4"
+          }
+        ],
+        "AMRenabled": true,
+        "floorspace": {
+          "floorspace": 213,
+          "units": "square meters"
+        },
+        })
+      .expect(201)
+      .then(res => {
+        expect(res.body).to.include.keys(
+          'address',
+          'floorspace',
+          'manager',
+          'gasMeters',
+          'electricityMeters',
+          'AMRenabled',
+        );      
+      });
+  });
+  it('POST returns a 400 status and error message when the new post is empty', () => {
+    return request
+      .post('/api/sites')
+      .send({  })
+      .expect(400)
+      .then(res => { 
+        expect(res.body.msg).to.equal('sites validation failed: manager: Path `manager` is required.');
+      });
+  });   
+  it('POST returns a 400 status and error message when there is a missing required field in the new post', () => {
+    return request
+      .post('/api/sites')
+      .send({AMRenabled: "yes"})
+      .expect(400)
+      .then(res => { 
+        expect(res.body.msg).to.equal('sites validation failed: manager: Path `manager` is required.');
+      });
+  });   
+});   
+  describe('/api/sites/:owner_id}', () => {
+    it('GET site returns status 200 and object of site', () => {
+      return request
+        .get(`/api/sites/${owners[1]._id}`)
+        .expect(200)
+        .then((res) => {
+          expect(res.body.site[0]).to.include.keys(
+            'address',
+            'floorspace',
+            'manager',
+            'gasMeters',
+            'electricityMeters',
+            'AMRenabled',
+            'owner',
+          );
+        });
+    });
+  });
     it('POST creates a new site and assigns it to a user', () => {
       const newSite = {
         "address": {
@@ -98,76 +185,29 @@ describe('/api', () => {
         )
     });
   });
-  
-    it('POST site returns status 201 and a new site', () => {
+  describe('/owners', () => {
+    it('POST owner returns status 201 and a new owner', () => {
+      const newOwner = {
+      username: 'Blinky',
+      email: 'blinkyboi@gmail.com',
+      firstName: 'Blinky',
+      lastName: 'the Fish',
+    };
     return request
-      .post('/api/sites')
-      .send( {
-        "address": {
-          "houseNumber": "1",
-          "street": "something street",
-          "city": "liverpool",
-          "postcode": "L1 1AB",
-          "telephone": "07733781805"
-        },
-        "manager": "somebody",
-        "gasMeters": [
-          {
-            "accountNumber": "123",
-            "ID": "3"
-          },
-          {
-            "accountNumber": "456",
-            "ID": "4"
-          }
-        ],
-        "electricityMeters": [
-          {
-            "accountNumber": "123",
-            "ID": "3"
-          },
-          {
-            "accountNumber": "456",
-            "ID": "4"
-          }
-        ],
-        "AMRenabled": true,
-        "floorspace": {
-          "floorspace": 213,
-          "units": "square meters"
-        },
-        })
+      .post('/api/owners')
+      .send(newOwner)
       .expect(201)
-      .then(res => {
-        expect(res.body).to.include.keys(
-          'address',
-          'floorspace',
-          'manager',
-          'gasMeters',
-          'electricityMeters',
-          'AMRenabled',
-        );      
+      .then(({ body }) => {
+        expect(body).to.include.keys(
+          'username', 
+          'firstName', 
+          'lastName', 
+          'email'
+          );
+        expect(body.username).to.equal(newOwner.username.toLowerCase());
       });
   });
-    describe('/api/sites/:owner_id}', () => {
-      it('GET site returns status 200 and object of site', () => {
-        return request
-          .get(`/api/sites/${owners[1]._id}`)
-          .expect(200)
-          .then((res) => {
-            expect(res.body.site[0]).to.include.keys(
-              'address',
-              'floorspace',
-              'manager',
-              'gasMeters',
-              'electricityMeters',
-              'AMRenabled',
-              'owner',
-            );
-          });
-      });
-    });
-  describe('/owners', () => {
+});
     describe('/api/owners/:username', () => {
       it('GET owner by username returns status 200 and object of user data', () => {
         return request
@@ -183,36 +223,24 @@ describe('/api', () => {
           });
         });
       });
-      it('POST owner returns status 201 and a new owner', () => {
-          const newOwner = {
-          username: 'Blinky',
-          email: 'blinkyboi@gmail.com',
-          firstName: 'Blinky',
-          lastName: 'the Fish',
-        };
+    describe('/api/owners/:owner_id', () => {
+      it('PATCH to update owner updates owner information', () => {
         return request
-          .post('/api/owners')
-          .send(newOwner)
-          .expect(201)
-          .then(({ body }) => {
-            expect(body).to.include.keys(
-              'username', 
-              'firstName', 
-              'lastName', 
-              'email'
-              );
-            expect(body.username).to.equal(newOwner.username.toLowerCase());
+          .patch(`/api/owners/${owners[0]._id}`)
+          .send({ updatedUsername: 'Mitchismean', updatedFirstName: 'Mitch', updatedLastName: 'Ismean', updatedEmail: "mitchismean@gmail.com"})
+          .expect(200)
+          .then(res => {
+            expect(res.body.owner.username).to.equal("mitchismean")
           });
       });
     });
-  });
   describe('/api/sites/:site_id', () => {
-  it('DELETE removes a site from an owner', () => {
-    return request.delete(`/api/sites/${sites[0]._id}`)
-      .expect(200)
-      .then(res => {
-        expect(res.body.msg).to.equal('Site successfully removed')
+    it('DELETE removes a site from an owner', () => {
+      return request.delete(`/api/sites/${sites[0]._id}`)
+        .expect(200)
+        .then(res => {
+          expect(res.body.msg).to.equal('Site successfully removed')
+        });
       });
     });
   });
-});

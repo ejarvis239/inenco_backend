@@ -87,11 +87,9 @@ const addSiteToOwner = (req, res, next) => {
   };
 
   const deleteSite = (req, res, next) => {
-    console.log("HELLO")
     const {site_id} = req.params
     Site.findByIdAndRemove({_id: site_id})
     .then(() => {
-      console.log("HELLO")
       res.status(200).send({ msg: "Site successfully removed" })
     })
     .catch(next)

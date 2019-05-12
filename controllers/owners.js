@@ -17,6 +17,17 @@ const getOwners = (req, res, next) => {
   .catch(next)
 };
 
+const updateOwner = (req, res, next) => {
+  const {updatedUsername, updatedFirstName, updatedLastName, updatedEmail} = req.body
+  Owner.findOneAndUpdate(req.params.user_id,
+      { $set: { username: updatedUsername.toLowerCase(), firstName: updatedFirstName.toLowerCase(), lastName: updatedLastName.toLowerCase(), email: updatedEmail.toLowerCase() } },
+      { new: true })
+      .then((owner) => {
+        res.status(200).send({ owner });
+      })
+      .catch(next);
+};
+
 const addOwner = (req, res, next) => {
   const newOwner = Owner({
         ...req.body,
@@ -32,4 +43,4 @@ const addOwner = (req, res, next) => {
         .catch(next);
     };
 
-module.exports = { getOwner, addOwner, getOwners };
+module.exports = { getOwner, addOwner, getOwners, updateOwner };

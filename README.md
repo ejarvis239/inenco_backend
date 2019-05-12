@@ -1,8 +1,7 @@
 inenco - Backend 
-
 A backend API that allows owners to manage site information.
 
-A live version can be viewed at: https://inenco.herokuapp.com/
+A live version can be viewed at: https://inenco-backend.herokuapp.com/
 
 Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes
